@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Version>1.0.0</Version>
+    <FileVersion>1.0.0</FileVersion>
+    <Authors>MassPay</Authors>
+    <Description>Client for MasspaySdk</Description>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PackageId>MasspaySdk</PackageId>
+    <PackageVersion>1.0.0</PackageVersion>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageTags>SDK Client MasspaySdk</PackageTags>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/masspayio/masspay-c-sharp-sdk</PackageProjectUrl>
+    <PackageReleaseNotes>Name is now included in pages</PackageReleaseNotes>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/masspayio/masspay-c-sharp-sdk</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryCommit>commit</RepositoryCommit> <!-- Value is inserted in CI right before publish -->
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="../../LICENSE" Pack="true" PackagePath="\" />
+    <None Include="../../README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+</Project>

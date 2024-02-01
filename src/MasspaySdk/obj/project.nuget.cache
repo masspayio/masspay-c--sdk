@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "i5n/4TOLLMhjrTyLghrzcos7dPC+h9sFzP0L+gnKnzo6yHe8xh5wLHBYuniebOQ6hW9tiayjPca5CrneChuoJg==",
+  "success": true,
+  "projectFilePath": "/Users/jakubvacek/sdk-generator/masspay/csharp-sdk/src/MasspaySdk/MasspaySdk.csproj",
+  "expectedPackageFiles": [
+    "/Users/jakubvacek/.nuget/packages/microsoft.netcore.app.ref/7.0.15/microsoft.netcore.app.ref.7.0.15.nupkg.sha512",
+    "/Users/jakubvacek/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.15/microsoft.aspnetcore.app.ref.7.0.15.nupkg.sha512"
+  ],
+  "logs": []
+}
