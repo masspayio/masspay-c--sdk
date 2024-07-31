@@ -1,7 +1,7 @@
 /**
  * MassPay API
  *
- * The version of the OpenAPI document: 0.1.4
+ * The version of the OpenAPI document: 1.0.0
  * Contact: info@masspay.io
  *
  * NOTE: This file is auto generated.
@@ -22,6 +22,7 @@ public class Sdk
     public LoadService Load { get; }
     public PayoutService Payout { get; }
     public SpendBackService SpendBack { get; }
+    public SubaccountService Subaccount { get; }
     public TaxService Tax { get; }
     public UserService User { get; }
     public WalletService Wallet { get; }
@@ -39,6 +40,7 @@ public class Sdk
         Load = new LoadService(_httpRequest);
         Payout = new PayoutService(_httpRequest);
         SpendBack = new SpendBackService(_httpRequest);
+        Subaccount = new SubaccountService(_httpRequest);
         Tax = new TaxService(_httpRequest);
         User = new UserService(_httpRequest);
         Wallet = new WalletService(_httpRequest);

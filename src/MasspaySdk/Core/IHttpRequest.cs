@@ -1,7 +1,7 @@
 /**
  * MassPay API
  *
- * The version of the OpenAPI document: 0.1.4
+ * The version of the OpenAPI document: 1.0.0
  * Contact: info@masspay.io
  *
  * NOTE: This file is auto generated.
@@ -11,6 +11,6 @@ namespace MasspaySdk.Core;
 
 public interface IHttpRequest
 {
-    Task<T> Request<T>(ApiRequestOptions options);
-    Task Request(ApiRequestOptions options);
+    Task<ApiResponse<T>> Request<T>(ApiRequestOptions options);
+    Task<ApiResponse<object>> Request(ApiRequestOptions options);
 }

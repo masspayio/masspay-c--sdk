@@ -2,7 +2,7 @@
 /**
  * MassPay API
  *
- * The version of the OpenAPI document: 0.1.4
+ * The version of the OpenAPI document: 1.0.0
  * Contact: info@masspay.io
  *
  * NOTE: This file is auto generated.
@@ -10,35 +10,48 @@
  */
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema.Generation;
+using Newtonsoft.Json.Schema;
 using MasspaySdk.Core;
 namespace MasspaySdk.Models;
 public class AttrsRequirement
 {
     [JsonPropertyName("token")]
+    [Newtonsoft.Json.JsonProperty("token", Required = Newtonsoft.Json.Required.Always)]
     public required string Token { get; init; }
     [JsonPropertyName("attr_set_token")]
-    public string? AttrSetToken { get; set; }
+    [Newtonsoft.Json.JsonProperty("attr_set_token", Required = Newtonsoft.Json.Required.DisallowNull)]
+    public string AttrSetToken { get; set; }
     [JsonPropertyName("label")]
-    public string? Label { get; set; }
+    [Newtonsoft.Json.JsonProperty("label", Required = Newtonsoft.Json.Required.Always)]
+    public required string Label { get; init; }
     [JsonPropertyName("validation")]
-    public string? Validation { get; set; }
+    [Newtonsoft.Json.JsonProperty("validation", Required = Newtonsoft.Json.Required.Always)]
+    public required string Validation { get; init; }
     [JsonPropertyName("is_optional")]
-    public bool? IsOptional { get; set; }
+    [Newtonsoft.Json.JsonProperty("is_optional", Required = Newtonsoft.Json.Required.Always)]
+    public required bool IsOptional { get; init; }
     [JsonPropertyName("value")]
-    public required string Value { get; init; }
+    [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.DisallowNull)]
+    public string Value { get; set; }
     [JsonPropertyName("expected_value")]
-    public string? ExpectedValue { get; set; }
+    [Newtonsoft.Json.JsonProperty("expected_value", Required = Newtonsoft.Json.Required.DisallowNull)]
+    public string ExpectedValue { get; set; }
     [JsonPropertyName("type")]
-    public AttrsRequirementType? Type { get; set; }
+    [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Always)]
+    public required AttrsRequirementType Type { get; init; }
     [JsonPropertyName("input_type")]
+    [Newtonsoft.Json.JsonProperty("input_type", Required = Newtonsoft.Json.Required.Always)]
     public required AttrsRequirementInputType InputType { get; init; }
     [JsonPropertyName("last_attr_value_used")]
-    public bool? LastAttrValueUsed { get; set; }
-
+    [Newtonsoft.Json.JsonProperty("last_attr_value_used", Required = Newtonsoft.Json.Required.DisallowNull)]
+    public bool LastAttrValueUsed { get; set; }
     /**
      * The type of attribute
      */
     [JsonConverter(typeof(StringValueEnumConverter<AttrsRequirementType>))]
+    [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
     public enum AttrsRequirementType
     {
         [StringValue("CardNumber")]
@@ -112,14 +125,13 @@ public class AttrsRequirement
         [StringValue("Address1")]
         ADDRESS1,
         [StringValue("IFramePaymentCollection")]
-        IFRAME_PAYMENT_COLLECTION,
-        [StringValue("PostalCode")]
-        POSTAL_CODE
+        IFRAME_PAYMENT_COLLECTION
     }
     /**
      * The type of input field that is suggested for this this attribute
      */
     [JsonConverter(typeof(StringValueEnumConverter<AttrsRequirementInputType>))]
+    [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
     public enum AttrsRequirementInputType
     {
         [StringValue("text")]

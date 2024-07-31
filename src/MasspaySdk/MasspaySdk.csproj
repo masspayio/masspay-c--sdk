@@ -1,19 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <PropertyGroup>
-    <Version>1.0.0</Version>
-    <FileVersion>1.0.0</FileVersion>
+    <Version>2.0.0</Version>
+    <FileVersion>2.0.0</FileVersion>
     <Authors>MassPay</Authors>
     <Description>Client for MasspaySdk</Description>
   </PropertyGroup>
   <PropertyGroup>
     <PackageId>MasspaySdk</PackageId>
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersion>2.0.0</PackageVersion>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>SDK Client MasspaySdk</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -27,5 +27,9 @@
   <ItemGroup>
     <None Include="../../LICENSE" Pack="true" PackagePath="\" />
     <None Include="../../README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.15" />
+    <PackageReference Include="Remote.Linq.Newtonsoft.Json" Version="7.1.0" />
   </ItemGroup>
 </Project>

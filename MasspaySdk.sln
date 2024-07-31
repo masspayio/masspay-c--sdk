@@ -4,7 +4,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A25F7A11-F62D-4FE2-8E3D-B840762D9882}"
 EndProject
-Project("{aa33fd5d-a016-48b4-a022-e97fcc0567df}") = "MasspaySdk", "src\MasspaySdk\MasspaySdk.csproj", "{95E3000B-D83E-460D-B2FF-DF19EA948B30}"
+Project("{f222e88b-a979-4231-b303-ce08b730b303}") = "MasspaySdk", "src\MasspaySdk\MasspaySdk.csproj", "{95E3000B-D83E-460D-B2FF-DF19EA948B30}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasspaySdkTests", "src\MasspaySdk.Tests\MasspaySdkTests.csproj", "{519F6785-F165-450B-B925-62B02F4CD8E6}"
 EndProject

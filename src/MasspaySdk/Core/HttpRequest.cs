@@ -1,7 +1,7 @@
 /**
  * MassPay API
  *
- * The version of the OpenAPI document: 0.1.4
+ * The version of the OpenAPI document: 1.0.0
  * Contact: info@masspay.io
  *
  * NOTE: This file is auto generated.
@@ -10,7 +10,6 @@
 using System.Net.Http.Json;
 using System.Net.Mime;
 using System.Text;
-using System.Text.Json;
 
 namespace MasspaySdk.Core;
 
@@ -30,10 +29,10 @@ public class HttpRequest : IHttpRequest
     /**
      * Request method
      * @param options The request options from the service
-     * @returns Task<T>
+     * @returns Task<ApiResponse<T>>
      * @throws ApiError
      */
-    public async Task<T> Request<T>(ApiRequestOptions options)
+    public async Task<ApiResponse<T>> Request<T>(ApiRequestOptions options)
     {
         using HttpClient httpClient = this.HttpClient ?? new() { BaseAddress = _config.BaseUrl };
         using HttpContent? content = options.Body?.GetHttpContent() ?? null;
@@ -49,7 +48,13 @@ public class HttpRequest : IHttpRequest
 
         if (response.IsSuccessStatusCode)
         {
-            return await response.Content.ReadFromJsonAsync<T>() ?? throw new Exception("Response was null");
+            T value = await response.Content.ReadFromJsonAsync<T>() ?? throw new Exception("Response was null");
+            return new ApiResponse<T>
+            {
+                Value = value,
+                Status = response.StatusCode,
+                RawHeaders = response.Headers.ToDictionary(header => header.Key, header => header.Value.First()),
+            };
         }
         else
         {
@@ -68,12 +73,12 @@ public class HttpRequest : IHttpRequest
     /**
      * Request method
      * @param options The request options from the service
-     * @returns Task
+     * @returns Task<ApiResponse<object>>
      * @throws ApiError
      */
-    public async Task Request(ApiRequestOptions options)
+    public async Task<ApiResponse<object>> Request(ApiRequestOptions options)
     {
-        await this.Request<object>(options);
+        return await this.Request<object>(options);
     }
 
     private async Task<IDictionary<string, string>> GetHeaders(ApiRequestOptions options)
@@ -86,6 +91,7 @@ public class HttpRequest : IHttpRequest
         var headers = new Dictionary<string, string>()
     {
       { "Accept", MediaTypeNames.Application.Json  },
+      { "user-agent", "MasspaySdk (Csharp/2.0.0; MassPayApi/1.0.0)" },
     };
         defaultHeaders?.ToList().ForEach(header => headers[header.Key] = header.Value);
         options.Headers?.ToList().ForEach(header => headers[header.Key] = header.Value);
@@ -104,7 +110,7 @@ public class HttpRequest : IHttpRequest
 
     private Uri BuildPath(string path, IDictionary<string, object>? pathParams, IDictionary<string, object>? queryParams)
     {
-        var uri = this._config.BaseUrl + path;
+        var uri = JoinUrl(this._config.BaseUrl.ToString(), path);
 
         if (pathParams != null)
         {
@@ -140,5 +146,21 @@ public class HttpRequest : IHttpRequest
         }
 
         return new Uri(uri);
+    }
+
+    private static string JoinUrl(string basePath, string path)
+    {
+        var trimmedBasePath = basePath.Trim();
+        if (trimmedBasePath.EndsWith("/"))
+        {
+            trimmedBasePath = trimmedBasePath.Substring(0, trimmedBasePath.Length - 1);
+        }
+        var trimmedPath = path.Trim();
+        if (trimmedPath.StartsWith("/"))
+        {
+            trimmedPath = trimmedPath.Substring(1);
+        }
+
+        return $"{trimmedBasePath}/{trimmedPath}";
     }
 }

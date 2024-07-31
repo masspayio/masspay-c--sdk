@@ -1,13 +1,15 @@
 /**
  * MassPay API
  *
- * The version of the OpenAPI document: 0.1.4
+ * The version of the OpenAPI document: 1.0.0
  * Contact: info@masspay.io
  *
  * NOTE: This file is auto generated.
  * Do not edit the file manually.
  */
+using System.Text;
 using System.Text.Json;
+using System.Net;
 using MasspaySdk.Core;
 using MasspaySdk.Models;
 using MasspaySdk.Services;
@@ -27,14 +29,16 @@ public class AccountServiceTests
         };
         var expectedResponse = new List<object>
 {
-new
-{
-    token = "8bb3693f-2f98-43dd-a990-615b6a21596d",
-    balance = 100.5,
-    currency_code = "USD"
-}
+    new
+    {
+        token = "8bb3693f-2f98-43dd-a990-615b6a21596d",
+        balance = 100.5,
+        currency_code = "USD"
+    }
+
 };
-        var url = config.BaseUrl + "/account/balance";
+
+        var url = MockedHttpRequest.JoinUrl(config.BaseUrl.ToString(), "/payout/account/balance");
 
         var query = new Dictionary<string, object>();
 
@@ -45,9 +49,13 @@ new
           { "Accept", "application/json"}
         };
 
+        var responseHeaders = new Dictionary<string, string> {
+           { "Access-Control-Allow-Origin","" },
+        };
+
         var mockHttp = new MockHttpMessageHandler();
         var mock = mockHttp.When(HttpMethod.Get, MockedHttpRequest.BuildPath(url, parameters, query))
-          .Respond("application/json", JsonSerializer.Serialize(expectedResponse));
+          .Respond(HttpStatusCode.OK, responseHeaders, new StringContent(JsonSerializer.Serialize(expectedResponse), Encoding.UTF8, "application/json"));
 
         mock.WithHeaders(headers);
 
@@ -56,8 +64,9 @@ new
 
         var result = await service.GetAccountBalance();
 
-        Assert.NotNull(result);
-        Assert.Equal(JsonSerializer.Serialize(expectedResponse), JsonSerializer.Serialize(result), StringComparer.OrdinalIgnoreCase);
+        Assert.NotNull(result.Value);
+        Assert.Equal(JsonSerializer.Serialize(expectedResponse), JsonSerializer.Serialize(result.Value), StringComparer.OrdinalIgnoreCase);
+        Assert.Equal("", result.Headers.AccessControlAllowOrigin);
     }
 
     [Fact]
@@ -70,13 +79,14 @@ new
         };
         var expectedResponse = new
         {
-            content = "iXp4LAx3wt"
+            content = ""
         };
-        var url = config.BaseUrl + "/account/statement";
+
+        var url = MockedHttpRequest.JoinUrl(config.BaseUrl.ToString(), "/payout/account/statement");
 
         var query = new Dictionary<string, object>();
-        query.Add("start_date", "2021-01-01");
-        query.Add("ending_date", "2021-02-01");
+        query.Add("start_date", "");
+        query.Add("ending_date", "");
 
         var parameters = new Dictionary<string, object>();
 
@@ -85,19 +95,24 @@ new
           { "Accept", "application/json"}
         };
 
+        var responseHeaders = new Dictionary<string, string> {
+           { "Access-Control-Allow-Origin","" },
+        };
+
         var mockHttp = new MockHttpMessageHandler();
         var mock = mockHttp.When(HttpMethod.Get, MockedHttpRequest.BuildPath(url, parameters, query))
-          .Respond("application/json", JsonSerializer.Serialize(expectedResponse));
+          .Respond(HttpStatusCode.OK, responseHeaders, new StringContent(JsonSerializer.Serialize(expectedResponse), Encoding.UTF8, "application/json"));
 
         mock.WithHeaders(headers);
 
         var mockedHttpRequest = new MockedHttpRequest(config, mockHttp);
         var service = new AccountService(mockedHttpRequest);
 
-        var result = await service.GetAccountStatement("2021-01-01", "2021-02-01");
+        var result = await service.GetAccountStatement("", "");
 
-        Assert.NotNull(result);
-        Assert.Equal(JsonSerializer.Serialize(expectedResponse), JsonSerializer.Serialize(result), StringComparer.OrdinalIgnoreCase);
+        Assert.NotNull(result.Value);
+        Assert.Equal(JsonSerializer.Serialize(expectedResponse), JsonSerializer.Serialize(result.Value), StringComparer.OrdinalIgnoreCase);
+        Assert.Equal("", result.Headers.AccessControlAllowOrigin);
     }
 
 }
