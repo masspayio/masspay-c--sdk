@@ -2,7 +2,7 @@
 /**
  * MassPay API
  *
- * The version of the OpenAPI document: 0.1.4
+ * The version of the OpenAPI document: 1.0.0
  * Contact: info@masspay.io
  *
  * NOTE: This file is auto generated.
@@ -10,6 +10,9 @@
  */
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema.Generation;
+using Newtonsoft.Json.Schema;
 using MasspaySdk.Core;
 namespace MasspaySdk.Models;
 /**
@@ -18,46 +21,67 @@ namespace MasspaySdk.Models;
 public class TxnHistoryResp
 {
     [JsonPropertyName("token")]
+    [Newtonsoft.Json.JsonProperty("token", Required = Newtonsoft.Json.Required.Always)]
     public required string Token { get; init; }
     [JsonPropertyName("type")]
+    [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Always)]
     public required TxnHistoryRespType Type { get; init; }
     [JsonPropertyName("time_of_txn")]
+    [Newtonsoft.Json.JsonProperty("time_of_txn", Required = Newtonsoft.Json.Required.Always)]
     public required string TimeOfTxn { get; init; }
     [JsonPropertyName("source_amount")]
+    [Newtonsoft.Json.JsonProperty("source_amount", Required = Newtonsoft.Json.Required.Always)]
     public required double SourceAmount { get; init; }
     [JsonPropertyName("source_currency_code")]
+    [Newtonsoft.Json.JsonProperty("source_currency_code", Required = Newtonsoft.Json.Required.Always)]
     public required string SourceCurrencyCode { get; init; }
     [JsonPropertyName("destination_amount")]
+    [Newtonsoft.Json.JsonProperty("destination_amount", Required = Newtonsoft.Json.Required.Always)]
     public required double DestinationAmount { get; init; }
     [JsonPropertyName("destination_currency_code")]
+    [Newtonsoft.Json.JsonProperty("destination_currency_code", Required = Newtonsoft.Json.Required.Always)]
     public required string DestinationCurrencyCode { get; init; }
     [JsonPropertyName("fee")]
+    [Newtonsoft.Json.JsonProperty("fee", Required = Newtonsoft.Json.Required.Always)]
     public required double Fee { get; init; }
     [JsonPropertyName("status")]
+    [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Always)]
     public required TxnHistoryRespStatus Status { get; init; }
     [JsonPropertyName("notes")]
-    public string? Notes { get; set; }
+    [Newtonsoft.Json.JsonProperty("notes", Required = Newtonsoft.Json.Required.DisallowNull)]
+    public string Notes { get; set; }
     [JsonPropertyName("payer_name")]
-    public string? PayerName { get; set; }
+    [Newtonsoft.Json.JsonProperty("payer_name", Required = Newtonsoft.Json.Required.DisallowNull)]
+    public string PayerName { get; set; }
     [JsonPropertyName("pickup_code")]
-    public string? PickupCode { get; set; }
+    [Newtonsoft.Json.JsonProperty("pickup_code", Required = Newtonsoft.Json.Required.DisallowNull)]
+    public string PickupCode { get; set; }
     [JsonPropertyName("source_token")]
-    public string? SourceToken { get; set; }
+    [Newtonsoft.Json.JsonProperty("source_token", Required = Newtonsoft.Json.Required.DisallowNull)]
+    public string SourceToken { get; set; }
     [JsonPropertyName("destination_token")]
+    [Newtonsoft.Json.JsonProperty("destination_token", Required = Newtonsoft.Json.Required.Always)]
     public required string DestinationToken { get; init; }
     [JsonPropertyName("delivery_type")]
-    public TxnHistoryRespDeliveryType? DeliveryType { get; set; }
+    [Newtonsoft.Json.JsonProperty("delivery_type", Required = Newtonsoft.Json.Required.DisallowNull)]
+    public TxnHistoryRespDeliveryType DeliveryType { get; set; }
     [JsonPropertyName("client_transfer_id")]
-    public string? ClientTransferId { get; set; }
+    [Newtonsoft.Json.JsonProperty("client_transfer_id", Required = Newtonsoft.Json.Required.DisallowNull)]
+    public string ClientTransferId { get; set; }
     [JsonPropertyName("status_reason")]
-    public string? StatusReason { get; set; }
+    [Newtonsoft.Json.JsonProperty("status_reason", Required = Newtonsoft.Json.Required.DisallowNull)]
+    public string StatusReason { get; set; }
     [JsonPropertyName("client_id")]
-    public int? ClientId { get; set; }
-
+    [Newtonsoft.Json.JsonProperty("client_id", Required = Newtonsoft.Json.Required.DisallowNull)]
+    public int ClientId { get; set; }
+    [JsonPropertyName("user_token")]
+    [Newtonsoft.Json.JsonProperty("user_token", Required = Newtonsoft.Json.Required.DisallowNull)]
+    public string UserToken { get; set; }
     /**
      * Type of transaction
      */
     [JsonConverter(typeof(StringValueEnumConverter<TxnHistoryRespType>))]
+    [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
     public enum TxnHistoryRespType
     {
         [StringValue("load")]
@@ -73,6 +97,7 @@ public class TxnHistoryResp
      * Status of the transaction
      */
     [JsonConverter(typeof(StringValueEnumConverter<TxnHistoryRespStatus>))]
+    [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
     public enum TxnHistoryRespStatus
     {
         [StringValue("PENDING")]
@@ -96,6 +121,7 @@ public class TxnHistoryResp
      * The type of service. I.e. cash pickup, home delivery, etc. Only provided for payouts
      */
     [JsonConverter(typeof(StringValueEnumConverter<TxnHistoryRespDeliveryType>))]
+    [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
     public enum TxnHistoryRespDeliveryType
     {
         [StringValue("CASH_PICKUP")]

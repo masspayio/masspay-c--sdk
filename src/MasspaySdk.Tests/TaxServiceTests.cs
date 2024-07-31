@@ -1,13 +1,15 @@
 /**
  * MassPay API
  *
- * The version of the OpenAPI document: 0.1.4
+ * The version of the OpenAPI document: 1.0.0
  * Contact: info@masspay.io
  *
  * NOTE: This file is auto generated.
  * Do not edit the file manually.
  */
+using System.Text;
 using System.Text.Json;
+using System.Net;
 using MasspaySdk.Core;
 using MasspaySdk.Models;
 using MasspaySdk.Services;
@@ -27,31 +29,33 @@ public class TaxServiceTests
         };
         var expectedResponse = new List<object>
 {
-new
-{
-    user_token = "123e4567-e89b-12d3-a456-426614174000",
-    address1 = "2000 main st",
-    address2 = "apt D",
-    city = "Santa Monica",
-    state_province = "CA",
-    postal_code = 90405,
-    country = "USA",
-    first_name = "John",
-    middle_name = "WY1lw",
-    last_name = "Doe",
-    email = "jdoe@gmail.com",
-    mobile_number = "16502000226",
-    business_name = "ABC Company",
-    date_of_birth = "1975-03-24",
-    balance = 1500,
-    tax_id = "123-45-678"
-}
+    new
+    {
+        user_token = "123e4567-e89b-12d3-a456-426614174000",
+        address1 = "2000 main st",
+        address2 = "apt D",
+        city = "Santa Monica",
+        state_province = "CA",
+        postal_code = 90405,
+        country = "USA",
+        first_name = "John",
+        middle_name = "",
+        last_name = "Doe",
+        email = "jdoe@gmail.com",
+        mobile_number = "16502000226",
+        business_name = "ABC Company",
+        date_of_birth = "",
+        balance = 1500,
+        tax_id = "123-45-678"
+    }
+
 };
-        var url = config.BaseUrl + "/tax";
+
+        var url = MockedHttpRequest.JoinUrl(config.BaseUrl.ToString(), "/payout/tax");
 
         var query = new Dictionary<string, object>();
-        query.Add("amount_threshold", 83.50645456486382);
-        query.Add("tax_year", 85);
+        query.Add("amount_threshold", 0.12);
+        query.Add("tax_year", 0);
 
         var parameters = new Dictionary<string, object>();
 
@@ -60,19 +64,24 @@ new
           { "Accept", "application/json"}
         };
 
+        var responseHeaders = new Dictionary<string, string> {
+           { "Access-Control-Allow-Origin","" },
+        };
+
         var mockHttp = new MockHttpMessageHandler();
         var mock = mockHttp.When(HttpMethod.Get, MockedHttpRequest.BuildPath(url, parameters, query))
-          .Respond("application/json", JsonSerializer.Serialize(expectedResponse));
+          .Respond(HttpStatusCode.OK, responseHeaders, new StringContent(JsonSerializer.Serialize(expectedResponse), Encoding.UTF8, "application/json"));
 
         mock.WithHeaders(headers);
 
         var mockedHttpRequest = new MockedHttpRequest(config, mockHttp);
         var service = new TaxService(mockedHttpRequest);
 
-        var result = await service.GetTaxUsers(83.50645456486382, 85);
+        var result = await service.GetTaxUsers(0.12, 0);
 
-        Assert.NotNull(result);
-        Assert.Equal(JsonSerializer.Serialize(expectedResponse), JsonSerializer.Serialize(result), StringComparer.OrdinalIgnoreCase);
+        Assert.NotNull(result.Value);
+        Assert.Equal(JsonSerializer.Serialize(expectedResponse), JsonSerializer.Serialize(result.Value), StringComparer.OrdinalIgnoreCase);
+        Assert.Equal("", result.Headers.AccessControlAllowOrigin);
     }
 
     [Fact]
@@ -85,33 +94,40 @@ new
         };
         var expectedResponse = new
         {
-            interview_url = "Rc0Lk4ydl"
+            interview_url = ""
         };
-        var url = config.BaseUrl + "/{user_token}/tax";
+
+        var url = MockedHttpRequest.JoinUrl(config.BaseUrl.ToString(), "/payout/{user_token}/tax");
 
         var query = new Dictionary<string, object>();
+        query.Add("return_url", "https://www.masspay.io");
 
         var parameters = new Dictionary<string, object>();
-        parameters.Add("user_token", "rgIlyUno");
+        parameters.Add("user_token", "");
 
         var headers = new Dictionary<string, string> {
           { "Authorization", $"Bearer {token}" },
           { "Accept", "application/json"}
         };
 
+        var responseHeaders = new Dictionary<string, string> {
+           { "Access-Control-Allow-Origin","" },
+        };
+
         var mockHttp = new MockHttpMessageHandler();
         var mock = mockHttp.When(HttpMethod.Get, MockedHttpRequest.BuildPath(url, parameters, query))
-          .Respond("application/json", JsonSerializer.Serialize(expectedResponse));
+          .Respond(HttpStatusCode.OK, responseHeaders, new StringContent(JsonSerializer.Serialize(expectedResponse), Encoding.UTF8, "application/json"));
 
         mock.WithHeaders(headers);
 
         var mockedHttpRequest = new MockedHttpRequest(config, mockHttp);
         var service = new TaxService(mockedHttpRequest);
 
-        var result = await service.GetTaxInterviewLink("rgIlyUno");
+        var result = await service.GetTaxInterviewLink("", "https://www.masspay.io");
 
-        Assert.NotNull(result);
-        Assert.Equal(JsonSerializer.Serialize(expectedResponse), JsonSerializer.Serialize(result), StringComparer.OrdinalIgnoreCase);
+        Assert.NotNull(result.Value);
+        Assert.Equal(JsonSerializer.Serialize(expectedResponse), JsonSerializer.Serialize(result.Value), StringComparer.OrdinalIgnoreCase);
+        Assert.Equal("", result.Headers.AccessControlAllowOrigin);
     }
 
 }

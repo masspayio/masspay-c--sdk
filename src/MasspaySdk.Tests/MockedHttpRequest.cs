@@ -46,4 +46,20 @@ internal class MockedHttpRequest : HttpRequest
 
         return uri;
     }
+
+    public static string JoinUrl(string basePath, string path)
+    {
+        var trimmedBasePath = basePath.Trim();
+        if (trimmedBasePath.EndsWith("/"))
+        {
+            trimmedBasePath = trimmedBasePath.Substring(0, trimmedBasePath.Length - 1);
+        }
+        var trimmedPath = path.Trim();
+        if (trimmedPath.StartsWith("/"))
+        {
+            trimmedPath = trimmedPath.Substring(1);
+        }
+
+        return $"{trimmedBasePath}/{trimmedPath}";
+    }
 }

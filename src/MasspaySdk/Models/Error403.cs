@@ -2,7 +2,7 @@
 /**
  * MassPay API
  *
- * The version of the OpenAPI document: 0.1.4
+ * The version of the OpenAPI document: 1.0.0
  * Contact: info@masspay.io
  *
  * NOTE: This file is auto generated.
@@ -10,6 +10,9 @@
  */
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema.Generation;
+using Newtonsoft.Json.Schema;
 using MasspaySdk.Core;
 namespace MasspaySdk.Models;
 /**
@@ -18,16 +21,19 @@ namespace MasspaySdk.Models;
 public class Error403
 {
     [JsonPropertyName("title")]
-    public Error403Title? Title { get; set; }
+    [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.DisallowNull)]
+    public Error403Title Title { get; set; }
     [JsonPropertyName("message")]
+    [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.Always)]
     public required Error403Message Message { get; init; }
     [JsonPropertyName("code")]
+    [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.Always)]
     public required Error403Code Code { get; init; }
-
     /**
      * Error title.
      */
     [JsonConverter(typeof(StringValueEnumConverter<Error403Title>))]
+    [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
     public enum Error403Title
     {
         [StringValue("Forbidden.")]
@@ -37,6 +43,7 @@ public class Error403
      * Error description.
      */
     [JsonConverter(typeof(StringValueEnumConverter<Error403Message>))]
+    [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
     public enum Error403Message
     {
         [StringValue("The requested action is not allowed or the API credentials do not have sufficient permissions. Please ensure that the API credentials used for the request have the necessary permissions to perform the requested action.")]
@@ -46,6 +53,7 @@ public class Error403
      * Error code.
      */
     [JsonConverter(typeof(StringValueEnumConverter<Error403Code>))]
+    [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
     public enum Error403Code
     {
         [StringValue("403")]

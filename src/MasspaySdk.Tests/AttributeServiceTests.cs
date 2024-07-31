@@ -1,13 +1,15 @@
 /**
  * MassPay API
  *
- * The version of the OpenAPI document: 0.1.4
+ * The version of the OpenAPI document: 1.0.0
  * Contact: info@masspay.io
  *
  * NOTE: This file is auto generated.
  * Do not edit the file manually.
  */
+using System.Text;
 using System.Text.Json;
+using System.Net;
 using MasspaySdk.Core;
 using MasspaySdk.Models;
 using MasspaySdk.Services;
@@ -27,46 +29,53 @@ public class AttributeServiceTests
         };
         var expectedResponse = new List<object>
 {
-new
-{
-    destination_token = "123e4567-e89b-12d3-a456-426614174000",
-    payer_logo = "U3dhZ2dlciByb2Nrcw==",
-    payer_name = "Elektra",
-    exchange_rate = default(object),
-    max_limit = 10000,
-    min_limit = 84.70366090768948,
-    number_of_locations = 13007,
-    estimated_availability = "2020-07-21T17:32:28Z",
-    additional_description = "Requires drivers license to pickup funds",
-    is_dynamic_token = true,
-    attributes = default(object)
-}
+    new
+    {
+        destination_token = "123e4567-e89b-12d3-a456-426614174000",
+        payer_logo = "U3dhZ2dlciByb2Nrcw==",
+        payer_name = "Elektra",
+        exchange_rate = new List<object>(),
+        max_limit = 10000,
+        min_limit = 0,
+        number_of_locations = 13007,
+        estimated_availability = "",
+        additional_description = "Requires drivers license to pickup funds",
+        is_dynamic_token = true,
+        attributes = new List<object>()
+    }
+
 };
-        var url = config.BaseUrl + "/attribute/{user_token}";
+
+        var url = MockedHttpRequest.JoinUrl(config.BaseUrl.ToString(), "/payout/attribute/{user_token}");
 
         var query = new Dictionary<string, object>();
 
         var parameters = new Dictionary<string, object>();
-        parameters.Add("user_token", "2FwaNF");
+        parameters.Add("user_token", "");
 
         var headers = new Dictionary<string, string> {
           { "Authorization", $"Bearer {token}" },
           { "Accept", "application/json"}
         };
 
+        var responseHeaders = new Dictionary<string, string> {
+           { "Access-Control-Allow-Origin","" },
+        };
+
         var mockHttp = new MockHttpMessageHandler();
         var mock = mockHttp.When(HttpMethod.Get, MockedHttpRequest.BuildPath(url, parameters, query))
-          .Respond("application/json", JsonSerializer.Serialize(expectedResponse));
+          .Respond(HttpStatusCode.OK, responseHeaders, new StringContent(JsonSerializer.Serialize(expectedResponse), Encoding.UTF8, "application/json"));
 
         mock.WithHeaders(headers);
 
         var mockedHttpRequest = new MockedHttpRequest(config, mockHttp);
         var service = new AttributeService(mockedHttpRequest);
 
-        var result = await service.GetAllAttrs("2FwaNF");
+        var result = await service.GetAllAttrs("");
 
-        Assert.NotNull(result);
-        Assert.Equal(JsonSerializer.Serialize(expectedResponse), JsonSerializer.Serialize(result), StringComparer.OrdinalIgnoreCase);
+        Assert.NotNull(result.Value);
+        Assert.Equal(JsonSerializer.Serialize(expectedResponse), JsonSerializer.Serialize(result.Value), StringComparer.OrdinalIgnoreCase);
+        Assert.Equal("", result.Headers.AccessControlAllowOrigin);
     }
 
     [Fact]
@@ -79,36 +88,42 @@ new
         };
         var expectedResponse = new
         {
-            attr_set_token = "qEa6N"
+            attr_set_token = ""
         };
-        var url = config.BaseUrl + "/attribute/{user_token}/{destination_token}/{currency}";
+
+        var url = MockedHttpRequest.JoinUrl(config.BaseUrl.ToString(), "/payout/attribute/{user_token}/{destination_token}/{currency}");
 
         var query = new Dictionary<string, object>();
 
         var parameters = new Dictionary<string, object>();
-        parameters.Add("user_token", "Y2FGvDjJ");
-        parameters.Add("destination_token", "q0Rm");
+        parameters.Add("user_token", "");
+        parameters.Add("destination_token", "");
         parameters.Add("currency", "BRL");
 
         var headers = new Dictionary<string, string> {
           { "Authorization", $"Bearer {token}" },
           { "Accept", "application/json"}
         };
-        headers.Add("Idempotency-Key", "gm6OBO1Rbd");
+        headers.Add("Idempotency-Key", "");
+
+        var responseHeaders = new Dictionary<string, string> {
+           { "Access-Control-Allow-Origin","" },
+        };
 
         var mockHttp = new MockHttpMessageHandler();
         var mock = mockHttp.When(HttpMethod.Post, MockedHttpRequest.BuildPath(url, parameters, query))
-          .Respond("application/json", JsonSerializer.Serialize(expectedResponse));
+          .Respond(HttpStatusCode.OK, responseHeaders, new StringContent(JsonSerializer.Serialize(expectedResponse), Encoding.UTF8, "application/json"));
 
         mock.WithHeaders(headers);
 
         var mockedHttpRequest = new MockedHttpRequest(config, mockHttp);
         var service = new AttributeService(mockedHttpRequest);
 
-        var result = await service.StoreAttrs("Y2FGvDjJ", "q0Rm", "BRL", new() { Values = null, AttrSetToken = "attr_set_e2ca24e9-c546-4c64-90d2-cb8e70e7c9ba" }, "gm6OBO1Rbd");
+        var result = await service.StoreAttrs("", "", "BRL", new() { Values = null, AttrSetToken = "attr_set_e2ca24e9-c546-4c64-90d2-cb8e70e7c9ba" }, "");
 
-        Assert.NotNull(result);
-        Assert.Equal(JsonSerializer.Serialize(expectedResponse), JsonSerializer.Serialize(result), StringComparer.OrdinalIgnoreCase);
+        Assert.NotNull(result.Value);
+        Assert.Equal(JsonSerializer.Serialize(expectedResponse), JsonSerializer.Serialize(result.Value), StringComparer.OrdinalIgnoreCase);
+        Assert.Equal("", result.Headers.AccessControlAllowOrigin);
     }
 
     [Fact]
@@ -121,48 +136,55 @@ new
         };
         var expectedResponse = new List<object>
 {
-new
-{
-    token = "attr_e2ca24e9-c546-4c64-90d2-cb8e70e7c9ba",
-    attr_set_token = "attr_set_e2ca24e9-c546-4c64-90d2-cb8e70e7c9ba",
-    label = "Checking Account Number",
-    validation = "[0-9]{50}",
-    is_optional = true,
-    value = "432532532",
-    expected_value = "Date format MM/DD/YYYY",
-    type = "CardNumber",
-    input_type = "text",
-    last_attr_value_used = true
-}
+    new
+    {
+        token = "attr_e2ca24e9-c546-4c64-90d2-cb8e70e7c9ba",
+        attr_set_token = "attr_set_e2ca24e9-c546-4c64-90d2-cb8e70e7c9ba",
+        label = "Checking Account Number",
+        validation = "[0-9]{50}",
+        is_optional = true,
+        value = "432532532",
+        expected_value = "Date format MM/DD/YYYY",
+        type = "BankAccountNumber",
+        input_type = "text",
+        last_attr_value_used = true
+    }
+
 };
-        var url = config.BaseUrl + "/attribute/{user_token}/{destination_token}/{currency}";
+
+        var url = MockedHttpRequest.JoinUrl(config.BaseUrl.ToString(), "/payout/attribute/{user_token}/{destination_token}/{currency}");
 
         var query = new Dictionary<string, object>();
 
         var parameters = new Dictionary<string, object>();
-        parameters.Add("user_token", "m8QhsUkr");
-        parameters.Add("destination_token", "XrBDU6x7z");
+        parameters.Add("user_token", "");
+        parameters.Add("destination_token", "");
         parameters.Add("currency", "BRL");
 
         var headers = new Dictionary<string, string> {
           { "Authorization", $"Bearer {token}" },
           { "Accept", "application/json"}
         };
-        headers.Add("Idempotency-Key", "3YldR7yW");
+        headers.Add("Idempotency-Key", "");
+
+        var responseHeaders = new Dictionary<string, string> {
+           { "Access-Control-Allow-Origin","" },
+        };
 
         var mockHttp = new MockHttpMessageHandler();
         var mock = mockHttp.When(HttpMethod.Get, MockedHttpRequest.BuildPath(url, parameters, query))
-          .Respond("application/json", JsonSerializer.Serialize(expectedResponse));
+          .Respond(HttpStatusCode.OK, responseHeaders, new StringContent(JsonSerializer.Serialize(expectedResponse), Encoding.UTF8, "application/json"));
 
         mock.WithHeaders(headers);
 
         var mockedHttpRequest = new MockedHttpRequest(config, mockHttp);
         var service = new AttributeService(mockedHttpRequest);
 
-        var result = await service.GetAttrs("m8QhsUkr", "XrBDU6x7z", "BRL", "3YldR7yW");
+        var result = await service.GetAttrs("", "", "BRL", "");
 
-        Assert.NotNull(result);
-        Assert.Equal(JsonSerializer.Serialize(expectedResponse), JsonSerializer.Serialize(result), StringComparer.OrdinalIgnoreCase);
+        Assert.NotNull(result.Value);
+        Assert.Equal(JsonSerializer.Serialize(expectedResponse), JsonSerializer.Serialize(result.Value), StringComparer.OrdinalIgnoreCase);
+        Assert.Equal("", result.Headers.AccessControlAllowOrigin);
     }
 
 }

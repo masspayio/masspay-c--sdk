@@ -1,7 +1,7 @@
 /**
  * MassPay API
  *
- * The version of the OpenAPI document: 0.1.4
+ * The version of the OpenAPI document: 1.0.0
  * Contact: info@masspay.io
  *
  * NOTE: This file is auto generated.
@@ -11,8 +11,8 @@ namespace MasspaySdk.Core;
 
 public class OpenAPIConfig
 {
-    public Uri BaseUrl { get; set; } = new Uri("https://api.masspay.io/v0.1.4");
-    public string ApiVersion { get; set; } = "0.1.4";
+    public Uri BaseUrl { get; set; } = new Uri("https://api.masspay.io/v1.0.0");
+    public string ApiVersion { get; set; } = "1.0.0";
     public bool WithCredentials { get; set; } = false;
     public CredentialsUsage Credentials { get; set; } = CredentialsUsage.Include;
     public Func<ApiRequestOptions, Task<string>>? Token { get; set; } = null;

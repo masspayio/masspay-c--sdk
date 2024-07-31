@@ -2,7 +2,7 @@
 /**
  * MassPay API
  *
- * The version of the OpenAPI document: 0.1.4
+ * The version of the OpenAPI document: 1.0.0
  * Contact: info@masspay.io
  *
  * NOTE: This file is auto generated.
@@ -10,6 +10,9 @@
  */
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema.Generation;
+using Newtonsoft.Json.Schema;
 using MasspaySdk.Core;
 namespace MasspaySdk.Models;
 public class AttrVelocityRequest : System.Collections.Generic.List<AttrVelocityRequestItem>
@@ -17,14 +20,16 @@ public class AttrVelocityRequest : System.Collections.Generic.List<AttrVelocityR
 public class AttrVelocityRequestItem
 {
     [JsonPropertyName("type")]
+    [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Always)]
     public required AttrVelocityRequestItemType Type { get; init; }
     [JsonPropertyName("value")]
+    [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.Always)]
     public required string Value { get; init; }
-
     /**
      * The type of attribute to look for
      */
     [JsonConverter(typeof(StringValueEnumConverter<AttrVelocityRequestItemType>))]
+    [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
     public enum AttrVelocityRequestItemType
     {
         [StringValue("CardNumber")]
@@ -98,9 +103,7 @@ public class AttrVelocityRequestItem
         [StringValue("Address1")]
         ADDRESS1,
         [StringValue("IFramePaymentCollection")]
-        IFRAME_PAYMENT_COLLECTION,
-        [StringValue("PostalCode")]
-        POSTAL_CODE
+        IFRAME_PAYMENT_COLLECTION
     }
 }
 
