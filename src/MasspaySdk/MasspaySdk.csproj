@@ -6,14 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <PropertyGroup>
-    <Version>2.0.0</Version>
-    <FileVersion>2.0.0</FileVersion>
+    <Version>2.0.1</Version>
+    <FileVersion>2.0.1</FileVersion>
     <Authors>MassPay</Authors>
     <Description>Client for MasspaySdk</Description>
   </PropertyGroup>
   <PropertyGroup>
     <PackageId>MasspaySdk</PackageId>
-    <PackageVersion>2.0.0</PackageVersion>
+    <PackageVersion>2.0.1</PackageVersion>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>SDK Client MasspaySdk</PackageTags>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
@@ -22,11 +22,13 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/masspayio/masspay-c-sharp-sdk</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PackageIcon>../../assets/logo.webp</PackageIcon>
     <RepositoryCommit>commit</RepositoryCommit> <!-- Value is inserted in CI right before publish -->
   </PropertyGroup>
   <ItemGroup>
     <None Include="../../LICENSE" Pack="true" PackagePath="\" />
     <None Include="../../README.md" Pack="true" PackagePath="\" />
+    <None Include="../../assets/logo.webp" Pack="true" PackagePath="\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.15" />
