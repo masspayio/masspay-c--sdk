@@ -22,7 +22,7 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/masspayio/masspay-c-sharp-sdk</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageIcon>../../assets/logo.png</PackageIcon>
+    <PackageIcon>logo.png</PackageIcon>
     <RepositoryCommit>commit</RepositoryCommit> <!-- Value is inserted in CI right before publish -->
   </PropertyGroup>
   <ItemGroup>
