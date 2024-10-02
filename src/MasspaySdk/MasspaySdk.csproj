@@ -22,13 +22,13 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryUrl>https://github.com/masspayio/masspay-c-sharp-sdk</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageIcon>../../assets/logo.webp</PackageIcon>
+    <PackageIcon>logo.png</PackageIcon>
     <RepositoryCommit>commit</RepositoryCommit> <!-- Value is inserted in CI right before publish -->
   </PropertyGroup>
   <ItemGroup>
     <None Include="../../LICENSE" Pack="true" PackagePath="\" />
     <None Include="../../README.md" Pack="true" PackagePath="\" />
-    <None Include="../../assets/logo.webp" Pack="true" PackagePath="\" />
+    <None Include="../../assets/logo.png" Pack="true" PackagePath="\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.15" />

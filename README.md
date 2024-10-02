@@ -1,5 +1,5 @@
 <div align='center' class='text-center'>
-  <img alt='' src='./assets/logo.webp' width='200' />
+  <img alt='' src='./assets/logo.png' width='200' />
   <h1 align='center' class='text-center'>MasspaySdk</h1>
 </div>
 
